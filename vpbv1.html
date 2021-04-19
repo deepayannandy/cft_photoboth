@@ -1,0 +1,192 @@
+<!DOCTYPE>
+<html >
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Say Chees</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body{
+background-image: linear-gradient(to bottom right, red, black);
+}
+h1 {
+margin-top: 20px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 40px;
+  font-family: Arial;
+}
+
+
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+div{
+	margin-top: 20px;
+	height: 100%;
+  	margin-bottom: 20px;
+}
+h1.hidden {
+  display: none;
+}
+#canvas {
+  border: solid 1px gray;
+  margin-bottom: 10px;
+  display: block;
+}
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
+</head>
+<body>
+<center>
+	<div class="video-wrap" id="section1">
+		<image  src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/logocft.png" height=10% width=5%>
+		<H1>Virtual Photo Booth</H1>
+		<video id="video" autoplay style="max-width:100%;height:auto;"></video>
+		<div id="Cotroller">
+			<a href="#section2"><button id="snap" class="btn"><i class="fa fa-camera"></i> Capture</button></a>
+		</div>
+	</div>
+	<div id="section2">
+		<image  src="logocft.png" height=10% width=5%>
+		<H1>Looks Beautiful</H1>
+	<canvas id="canvas" width= 640 height= 480 style="max-width:100%;height:auto;">
+		</canvas>
+		<div id="control1">
+			<a href="#section3"><button id= "edit" class="btn"><i class="fa fa-upload"></i> Like</button></a>
+			<a href="#section1"><button onclick="reset()" class="btn"><i class="fa fa-recycle"></i> Retake</button></a>
+		</div>
+		<div id="editor">
+			<button  id="Frame1" class="btn" ><i class="fa fa-recycle"></i>Frame1</button>
+			<button  id="Frame2" class="btn"><i class="fa fa-download"></i>Frame2</button>
+			<button  id="Frame3" class="btn"><i class="fa fa-download"></i>Frame3</button>
+		</div>
+		<div id="control2">
+			<a href="#section1"><button  class="btn"  onclick="reset()"><i class="fa fa-recycle"></i> Retake</button></a>
+			<a href="#section1"><button  id="download" class="btn"><i class="fa fa-download"></i> Download </button></a>
+		</div>
+	</div>
+</center>
+	<script type="text/javascript">
+		'use strict';
+		const video =document.getElementById('video');
+		const canvas1=document.getElementById('canvas');
+		const snap=document.getElementById('snap');
+		const finalcanvas = document.getElementById("finalcanvas1");
+		const errorMsgElement= document.getElementById('span#ErrorMsg');
+		var s2= document.getElementById("section2");
+		s2.style.display = "none";
+		var e= document.getElementById("editor");
+		e.style.display = "none";
+
+		const constraints={
+			audio: false,
+			video:{
+				width: 640, height: 480
+			}
+		};
+		async function init(){
+			try{
+				const stream = await navigator.mediaDevices.getUserMedia(constraints)
+				handleSuccess(stream);
+			}
+			catch(e)
+			{
+				errorMsgElement.innerHTML=`navigator.getUserMedia.error:${e.toString()}`;
+			}
+		}
+
+		function handleSuccess(stream){
+			window.stream=stream;
+			video.srcObject=stream;
+		}
+		init();
+		function loadImage(src, onload) {
+    // http://www.thefutureoftheweb.com/blog/image-onload-isnt-being-called
+    	var img = new Image();
+
+    	img.onload = onload;
+    	img.src = src;
+
+    	return img;
+		}
+
+		var context= canvas1.getContext('2d');  
+		snap.addEventListener("click", function(){
+			context.drawImage(video,0,0,640,480);
+			var x = document.getElementById("control1");
+			var y= document.getElementById("control2");
+			var s1= document.getElementById("section1");
+			var s2= document.getElementById("section2");
+    		x.style.display = "block";
+    		y.style.display = "none";
+    		s1.style.display = "none";
+    		s2.style.display = "block";
+
+		});
+
+		var frame = new Image();
+		frame.crossOrigin = 'anonymous';
+		frame.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame.png';
+		edit.addEventListener("click", function(){
+			context.drawImage(frame,0,0,640,480);
+			var x = document.getElementById("control1");
+			var y= document.getElementById("control2");
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  				} else {
+    			x.style.display = "none";
+  				}
+  			y.style.display = "block";
+		});
+
+		download.addEventListener("click", function(){
+			var s1= document.getElementById("section1");
+			var s2= document.getElementById("section2");
+			s1.style.display = "block";
+    		s2.style.display = "none";
+    		fdownload(canvas, 'myimage.png');
+
+		});
+		function reset(){
+				var s1= document.getElementById("section1");
+				var s2= document.getElementById("section2");
+				s1.style.display = "block";
+    			s2.style.display = "none";
+			}
+		function fdownload(canvas, filename) {
+  /// create an "off-screen" anchor tag
+  			var lnk = document.createElement('a'), e;
+
+  /// the key here is to set the download attribute of the a tag
+  			lnk.download = filename;
+
+  /// convert canvas content to data-uri for link. When download
+  /// attribute is set the content pointed to by link will be
+  /// pushed as "download" in HTML5 capable browsers
+  			lnk.href = canvas.toDataURL("image/png;base64");
+
+  /// create a "fake" click-event to trigger the download
+  			if (document.createEvent) {
+    			e = document.createEvent("MouseEvents");
+    			e.initMouseEvent("click", true, true, window,
+                     0, 0, 0, 0, 0, false, false, false,
+                     false, 0, null);
+
+    			lnk.dispatchEvent(e);
+  			} else if (lnk.fireEvent) {
+    		lnk.fireEvent("onclick");
+  			}
+			}
+			
+
+	</script>
+
+</body>
