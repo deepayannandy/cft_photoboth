@@ -1,0 +1,75 @@
+<!DOCTYPE>
+<html >
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>A Product of CFT360</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body{
+background-image: linear-gradient(to bottom right, red, black);
+}
+h1 {
+margin-top: 20px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 40px;
+  font-family: Arial;
+}
+div{
+	margin-top: 10px;
+	height: 100%;
+  	margin-bottom: 10px;
+}
+.button {
+  border-radius: 4px;
+  background-color: black;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 240px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  margin-top: 15%;
+  margin-bottom: 5%;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+</head>
+<body>
+<center>
+	<div>
+		<image  src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/logocft.png" style="max-width:10%;height:auto;">
+		<H1>Virtual Photo Booth</H1>
+		<a href="https://deepayannandy.github.io/cft_photoboth/vpbv1.html"><button class="button"><span>Take A Snap</span></button></a>
+		<H1>Your Tag Line</H1>
+	</div>
+</center>
+</body>
+</html>
