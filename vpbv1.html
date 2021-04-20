@@ -83,6 +83,7 @@ h1.hidden {
 			<button  id="frame3" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F3_128x96.png"/></button>
 		</div>
 		<div id="control1">
+			<button onclick="like()" class="btn"><i class="fa fa-ok"></i> Like</button>
 			<button onclick="reset()" class="btn"><i class="fa fa-recycle"></i> Retake</button>
 		</div>
 		
@@ -166,44 +167,24 @@ h1.hidden {
 		var f3 = new Image();
 		f3.crossOrigin = 'anonymous';
 		f3.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/Photo_frame_1_1280x1280_PX.png_with_event_name__logo.png';
-		frame1.addEventListener("click", function(){
+		frame1.addEventListener("click", function(){ 
+			context.clearRect(0,0,640,480);
+			context.drawImage(capimg,0,0,640,480);
 			context.drawImage(f1,0,0,640,480);
-			var x = document.getElementById("control1");
-			var y= document.getElementById("control2");
-  			if (x.style.display === "none") {
-    			x.style.display = "block";
-  				} else {
-    			x.style.display = "none";
-  				}
-  			y.style.display = "block";
-  			var e= document.getElementById("editor");
-			e.style.display="none"
+			
+  			
 		});
-		frame3.addEventListener("click", function(){
+		frame3.addEventListener("click", function(){ 
+			context.clearRect(0,0,640,480); 
+			context.drawImage(capimg,0,0,640,480);
 			context.drawImage(f2,0,0,640,480);
-			var x = document.getElementById("control1");
-			var y= document.getElementById("control2");
-  			if (x.style.display === "none") {
-    			x.style.display = "block";
-  				} else {
-    			x.style.display = "none";
-  				}
-  			y.style.display = "block";
-  			var e= document.getElementById("editor");
-			e.style.display="none"
+			
 		});
 		frame2.addEventListener("click", function(){
+			context.clearRect(0,0,640,480);
+			context.drawImage(capimg,0,0,640,480);
 			context.drawImage(f3,0,0,640,480);
-			var x = document.getElementById("control1");
-			var y= document.getElementById("control2");
-  			if (x.style.display === "none") {
-    			x.style.display = "block";
-  				} else {
-    			x.style.display = "none";
-  				}
-  			y.style.display = "block";
-  			var e= document.getElementById("editor");
-			e.style.display="none"
+
 		});
 
 		download.addEventListener("click", function(){
@@ -247,7 +228,18 @@ h1.hidden {
 			frame1.addEventListener("click", function(){
 				console.log("frame1");
 			});
-			
+			function like(){
+			var x = document.getElementById("control1");
+			var y= document.getElementById("control2");
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  				} else {
+    			x.style.display = "none";
+  				}
+			y.style.display = "block";
+  			var e= document.getElementById("editor");
+			e.style.display="none"
+			}
 
 	</script>
 
