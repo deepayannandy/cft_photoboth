@@ -25,11 +25,22 @@ margin-top: 20px;
   font-size: 16px;
   cursor: pointer;
 }
-div{
-	margin-top: 20px;
+.section1{
+	margin-top: 30px;
 	height: 100%;
-  	margin-bottom: 20px;
+  	margin-bottom: 30px;
+} 
+.section2{
+	margin-top: 30px;
+	height: 100%;
+  	margin-bottom: 30px;
 }
+
+div{
+	margin-top: 10px;
+  	margin-bottom: 10px;
+}
+
 h1.hidden {
   display: none;
 }
@@ -49,19 +60,19 @@ h1.hidden {
 	<div class="video-wrap" id="section1">
 		<image  src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/logocft.png" height=10% width=5%>
 		<H1>Virtual Photo Booth</H1>
-		<video id="video" autoplay style="max-width:100%;height:auto;"></video>
+		<video id="video" autoplay style="max-width:100%;max-height:80%;"></video>
 		<div id="Cotroller">
-			<a href="#section2"><button id="snap" class="btn"><i class="fa fa-camera"></i> Capture</button></a>
+			<button id="snap" class="btn"><i class="fa fa-camera"></i> Capture</button>
 		</div>
 	</div>
 	<div id="section2">
-		<image  src="logocft.png" height=10% width=5%>
+		<image  src="logocft.png" style="max-width:auto;height:100%;">
 		<H1>Looks Beautiful</H1>
-	<canvas id="canvas" width= 640 height= 480 style="max-width:100%;height:auto;">
+	<canvas id="canvas" width= 720 height= 1280 style="max-width:100%;height:60%;">
 		</canvas>
 		<div id="control1">
-			<a href="#section3"><button id= "edit" class="btn"><i class="fa fa-upload"></i> Like</button></a>
-			<a href="#section1"><button onclick="reset()" class="btn"><i class="fa fa-recycle"></i> Retake</button></a>
+			<button id= "edit" class="btn"><i class="fa fa-upload"></i> Like</button>
+			<button onclick="reset()" class="btn"><i class="fa fa-recycle"></i> Retake</button>
 		</div>
 		<div id="editor">
 			<button  id="Frame1" class="btn" ><i class="fa fa-recycle"></i>Frame1</button>
@@ -69,8 +80,8 @@ h1.hidden {
 			<button  id="Frame3" class="btn"><i class="fa fa-download"></i>Frame3</button>
 		</div>
 		<div id="control2">
-			<a href="#section1"><button  class="btn"  onclick="reset()"><i class="fa fa-recycle"></i> Retake</button></a>
-			<a href="#section1"><button  id="download" class="btn"><i class="fa fa-download"></i> Download </button></a>
+			<button  class="btn"  onclick="reset()"><i class="fa fa-recycle"></i> Retake</button>
+			<button  id="download" class="btn"><i class="fa fa-download"></i> Download </button>
 		</div>
 	</div>
 </center>
@@ -84,12 +95,12 @@ h1.hidden {
 		var s2= document.getElementById("section2");
 		s2.style.display = "none";
 		var e= document.getElementById("editor");
-		e.style.display = "none";
+		e.style.display="none"
 
 		const constraints={
 			audio: false,
 			video:{
-				width: 640, height: 480
+				width: 720, height: 1280
 			}
 		};
 		async function init(){
@@ -120,7 +131,7 @@ h1.hidden {
 
 		var context= canvas1.getContext('2d');  
 		snap.addEventListener("click", function(){
-			context.drawImage(video,0,0,640,480);
+			context.drawImage(video,0,0,720,1280);
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
 			var s1= document.getElementById("section1");
@@ -136,7 +147,7 @@ h1.hidden {
 		frame.crossOrigin = 'anonymous';
 		frame.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame.png';
 		edit.addEventListener("click", function(){
-			context.drawImage(frame,0,0,640,480);
+			context.drawImage(frame,0,0,720,1280);
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
   			if (x.style.display === "none") {
