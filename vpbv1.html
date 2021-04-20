@@ -9,11 +9,19 @@ body{
 background-image: linear-gradient(to bottom right, red, black);
 }
 h1 {
-margin-top: 15px;
+margin-top: 20px;
   font-weight: bold;
   color: #fff;
-  font-size: 30px;
+  font-size: 40px;
   font-family: Arial;
+}
+.imbt{
+    display: inline-block;
+    height: 96px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    width: 128px;
 }
 
 
@@ -49,7 +57,6 @@ h1.hidden {
   margin-bottom: 10px;
   display: block;
 }
-/* Darker background on mouse-over */
 .btn:hover {
   background-color: RoyalBlue;
 }
@@ -60,7 +67,7 @@ h1.hidden {
 	<div class="video-wrap" id="section1">
 		<image  src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/logocft.png" style="max-width:5%;height:auto;">
 		<H1>Virtual Photo Booth</H1>
-		<video id="video" autoplay height="480" width="640" style="max-width:70%;height:70%;"></video>
+		<video id="video" autoplay height="480" width="640" style="max-width:70%;max-height:70%;"></video>
 		<div id="Cotroller">
 			<button id="snap" class="btn"><i class="fa fa-camera"></i> Capture</button>
 		</div>
@@ -68,17 +75,17 @@ h1.hidden {
 	<div id="section2">
 		<image  src="logocft.png" style="max-width:5%;height:auto;">
 		<H1>Looks Beautiful</H1>
-	<canvas id="canvas" width= "480" height= "640" style="max-width:70%;height:70%;">
+	<canvas id="canvas" width= 640 height= 480 style="max-width:70%;height:auto;">
 		</canvas>
+		<div id="editor">
+			<button  id="frame1" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame_1_128x96.png"/></button>
+			<button  id="frame2" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F2_128X96.png"/></button>
+			<button  id="frame3" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F3_128x96.png"/></button>
+		</div>
 		<div id="control1">
-			<button id= "edit" class="btn"><i class="fa fa-upload"></i> Like</button>
 			<button onclick="reset()" class="btn"><i class="fa fa-recycle"></i> Retake</button>
 		</div>
-		<div id="editor">
-			<button  id="Frame1" class="btn" ><i class="fa fa-recycle"></i>Frame1</button>
-			<button  id="Frame2" class="btn"><i class="fa fa-download"></i>Frame2</button>
-			<button  id="Frame3" class="btn"><i class="fa fa-download"></i>Frame3</button>
-		</div>
+		
 		<div id="control2">
 			<button  class="btn"  onclick="reset()"><i class="fa fa-recycle"></i> Retake</button>
 			<button  id="download" class="btn"><i class="fa fa-download"></i> Download </button>
@@ -98,11 +105,13 @@ h1.hidden {
 		s2.style.display = "none";
 		var e= document.getElementById("editor");
 		e.style.display="none"
+		var capimg;
+
 
 		const constraints={
 			audio: false,
 			video:{
-				width: 480, height: 640
+				width: 640, height: 480
 			}
 		};
 		async function init(){
@@ -133,11 +142,14 @@ h1.hidden {
 
 		var context= canvas1.getContext('2d');  
 		snap.addEventListener("click", function(){
-			context.drawImage(video,0,0,480,640);
+			context.drawImage(video,0,0,640,480);
+			capimg=video;
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
 			var s1= document.getElementById("section1");
 			var s2= document.getElementById("section2");
+			var e= document.getElementById("editor");
+			e.style.display="block"
     		x.style.display = "block";
     		y.style.display = "none";
     		s1.style.display = "none";
@@ -145,11 +157,17 @@ h1.hidden {
 
 		});
 
-		var frame = new Image();
-		frame.crossOrigin = 'anonymous';
-		frame.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame.png';
-		edit.addEventListener("click", function(){
-			context.drawImage(frame,0,0,480,640);
+		var f1 = new Image();
+		f1.crossOrigin = 'anonymous';
+		f1.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame.png';
+		var f2 = new Image();
+		f2.crossOrigin = 'anonymous';
+		f2.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/Photo_frame_2_1280x1280_PX.png_with_event_name__logo%20(1).png';
+		var f3 = new Image();
+		f3.crossOrigin = 'anonymous';
+		f3.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/Photo_frame_1_1280x1280_PX.png_with_event_name__logo.png';
+		frame1.addEventListener("click", function(){
+			context.drawImage(f1,0,0,640,480);
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
   			if (x.style.display === "none") {
@@ -158,6 +176,34 @@ h1.hidden {
     			x.style.display = "none";
   				}
   			y.style.display = "block";
+  			var e= document.getElementById("editor");
+			e.style.display="none"
+		});
+		frame3.addEventListener("click", function(){
+			context.drawImage(f2,0,0,640,480);
+			var x = document.getElementById("control1");
+			var y= document.getElementById("control2");
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  				} else {
+    			x.style.display = "none";
+  				}
+  			y.style.display = "block";
+  			var e= document.getElementById("editor");
+			e.style.display="none"
+		});
+		frame2.addEventListener("click", function(){
+			context.drawImage(f3,0,0,640,480);
+			var x = document.getElementById("control1");
+			var y= document.getElementById("control2");
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  				} else {
+    			x.style.display = "none";
+  				}
+  			y.style.display = "block";
+  			var e= document.getElementById("editor");
+			e.style.display="none"
 		});
 
 		download.addEventListener("click", function(){
@@ -175,9 +221,18 @@ h1.hidden {
     			s2.style.display = "none";
 			}
 		function fdownload(canvas, filename) {
+  /// create an "off-screen" anchor tag
   			var lnk = document.createElement('a'), e;
+
+  /// the key here is to set the download attribute of the a tag
   			lnk.download = filename;
+
+  /// convert canvas content to data-uri for link. When download
+  /// attribute is set the content pointed to by link will be
+  /// pushed as "download" in HTML5 capable browsers
   			lnk.href = canvas.toDataURL("image/png;base64");
+
+  /// create a "fake" click-event to trigger the download
   			if (document.createEvent) {
     			e = document.createEvent("MouseEvents");
     			e.initMouseEvent("click", true, true, window,
@@ -189,6 +244,9 @@ h1.hidden {
     		lnk.fireEvent("onclick");
   			}
 			}
+			frame1.addEventListener("click", function(){
+				console.log("frame1");
+			});
 			
 
 	</script>
