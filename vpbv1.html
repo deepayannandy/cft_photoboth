@@ -83,15 +83,15 @@ h1.hidden {
 			<button  id="frame3" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F3_128x96.png"/></button>
 		</div>
 		<div id="control1">
-			<button onclick="like()" class="btn"><i class="fa fa-ok"></i> Like</button>
-			<button onclick="reset()" class="btn"><i class="fa fa-recycle"></i> Retake</button>
+			<button onclick="like()" class="btn"><i class="fa fa-heart"></i> Like</button>
+			<button onclick="reset()" class="btn"><i class="fa fa-reply"></i> Retake</button>
 		</div>
 		
 		<div id="control2">
-			<button  class="btn"  onclick="reset()"><i class="fa fa-recycle"></i> Retake</button>
-			<a href="https://deepayannandy.github.io/cft_photoboth/index.html"><button  id="download" class="btn"><i class="fa fa-download"></i> Download </button></a>
+			<button  id="download" class="btn"><i class="fa fa-download"></i> Download </button>
 		</div>
 	</div>
+	<div id="cr"><canvas id="canvasr" width= 640 height= 480 style="max-width:70%;height:auto;"></canvas></div>
 </center>
 	<script type="text/javascript">
 		'use strict';
@@ -99,6 +99,7 @@ h1.hidden {
 		const sh=screen.height;
 		const video =document.getElementById('video');
 		const canvas1=document.getElementById('canvas');
+		const canvasr=document.getElementById('canvasr');
 		const snap=document.getElementById('snap');
 		const finalcanvas = document.getElementById("finalcanvas1");
 		const errorMsgElement= document.getElementById('span#ErrorMsg');
@@ -106,7 +107,8 @@ h1.hidden {
 		s2.style.display = "none";
 		var e= document.getElementById("editor");
 		e.style.display="none"
-		var capimg;
+		var cr= document.getElementById("cr");
+		cr.style.display="none"
 
 
 		const constraints={
@@ -142,9 +144,10 @@ h1.hidden {
 		}
 
 		var context= canvas1.getContext('2d');  
+		var context1= canvasr.getContext('2d');  
 		snap.addEventListener("click", function(){
 			context.drawImage(video,0,0,640,480);
-			capimg=video;
+			context1.drawImage(video,0,0,640,480);
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
 			var s1= document.getElementById("section1");
@@ -169,20 +172,20 @@ h1.hidden {
 		f3.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/Photo_frame_1_1280x1280_PX.png_with_event_name__logo.png';
 		frame1.addEventListener("click", function(){ 
 			context.clearRect(0,0,640,480);
-			context.drawImage(capimg,0,0,640,480);
+			context.drawImage(canvasr,0,0,640,480);
 			context.drawImage(f1,0,0,640,480);
 			
   			
 		});
 		frame3.addEventListener("click", function(){ 
 			context.clearRect(0,0,640,480); 
-			context.drawImage(capimg,0,0,640,480);
+			context.drawImage(canvasr,0,0,640,480);
 			context.drawImage(f2,0,0,640,480);
 			
 		});
 		frame2.addEventListener("click", function(){
 			context.clearRect(0,0,640,480);
-			context.drawImage(capimg,0,0,640,480);
+			context.drawImage(canvasr,0,0,640,480);
 			context.drawImage(f3,0,0,640,480);
 
 		});
