@@ -68,7 +68,7 @@ h1.hidden {
 	<div id="section2">
 		<image  src="logocft.png" style="max-width:5%;height:auto;">
 		<H1>Looks Beautiful</H1>
-	<canvas id="canvas" width= 480 height= 640 style="max-width:70%;height:auto;">
+	<canvas id="canvas" width= 640 height= 480 style="max-width:70%;height:auto;">
 		</canvas>
 		<div id="control1">
 			<button id= "edit" class="btn"><i class="fa fa-upload"></i> Like</button>
@@ -133,7 +133,7 @@ h1.hidden {
 
 		var context= canvas1.getContext('2d');  
 		snap.addEventListener("click", function(){
-			context.drawImage(video,0,0,480,640);
+			context.drawImage(video,0,0,640,480);
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
 			var s1= document.getElementById("section1");
@@ -149,7 +149,7 @@ h1.hidden {
 		frame.crossOrigin = 'anonymous';
 		frame.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame.png';
 		edit.addEventListener("click", function(){
-			context.drawImage(frame,0,0,480,640);
+			context.drawImage(frame,0,0,640,480);
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
   			if (x.style.display === "none") {
