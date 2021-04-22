@@ -17,11 +17,11 @@ margin-top: 20px;
 }
 .imbt{
     display: inline-block;
-    height: 96px;
+    height: 48px;
     padding: 0;
     margin: 0;
     vertical-align: top;
-    width: 128px;
+    width: 64px;
 }
 
 
@@ -31,6 +31,7 @@ margin-top: 20px;
   color: white;
   padding: 12px 16px;
   font-size: 16px;
+  border-radius: 1em;
   cursor: pointer;
 }
 .section1{
@@ -67,7 +68,7 @@ h1.hidden {
 	<div class="video-wrap" id="section1">
 		<image  src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/logocft.png" style="max-width:5%;height:auto;">
 		<H1>Virtual Photo Booth</H1>
-		<video id="video" autoplay height="480" width="640" style="max-width:70%;max-height:70%;"></video>
+		<video id="video" autoplay height="480" width="640" style="max-width:70%;max-height:auto;"></video>
 		<div id="Cotroller">
 			<button id="snap" class="btn"><i class="fa fa-camera"></i> Capture</button>
 		</div>
@@ -78,9 +79,9 @@ h1.hidden {
 	<canvas id="canvas" width= 480 height= 640 style="max-width:70%;height:auto;">
 		</canvas>
 		<div id="editor">
-			<button  id="frame1" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame_1_128x96.png"/></button>
-			<button  id="frame2" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F2_128X96.png"/></button>
-			<button  id="frame3" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F3_128x96.png"/></button>
+			<button  id="frame1" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame_1_128x96.png" style="max-width:100%;max-height:auto;"/></button>
+			<button  id="frame2" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F2_128X96.png" style="max-width:100%;max-height:auto;"/></button>
+			<button  id="frame3" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F3_128x96.png" style="max-width:100%;max-height:auto;"/></button>
 		</div>
 		<div id="control1">
 			<button onclick="like()" class="btn"><i class="fa fa-heart"></i> Like</button>
@@ -88,7 +89,7 @@ h1.hidden {
 		</div>
 		
 		<div id="control2">
-			<button  id="download" class="btn"><i class="fa fa-download"></i> Download </button>
+			<a href="https://deepayannandy.github.io/cft_photoboth/"><button  id="download" class="btn"><i class="fa fa-download"></i> Download </button></a>
 		</div>
 	</div>
 	<div id="cr"><canvas id="canvasr" width= 480 height= 640 style="max-width:70%;height:auto;"></canvas></div>
