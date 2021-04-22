@@ -67,7 +67,7 @@ h1.hidden {
 	<div class="video-wrap" id="section1">
 		<image  src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/logocft.png" style="max-width:5%;height:auto;">
 		<H1>Virtual Photo Booth</H1>
-		<video id="video" autoplay height="480" width="640" style="max-width:70%;max-height:70%;"></video>
+		<video id="video" autoplay height="640" width="480" style="max-width:70%;max-height:70%;"></video>
 		<div id="Cotroller">
 			<button id="snap" class="btn"><i class="fa fa-camera"></i> Capture</button>
 		</div>
@@ -75,7 +75,7 @@ h1.hidden {
 	<div id="section2">
 		<image  src="logocft.png" style="max-width:5%;height:auto;">
 		<H1>Looks Beautiful</H1>
-	<canvas id="canvas" width= 640 height= 480 style="max-width:70%;height:auto;">
+	<canvas id="canvas" width= 480 height= 640 style="max-width:70%;height:auto;">
 		</canvas>
 		<div id="editor">
 			<button  id="frame1" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame_1_128x96.png"/></button>
@@ -88,10 +88,10 @@ h1.hidden {
 		</div>
 		
 		<div id="control2">
-			<a href="https://deepayannandy.github.io/cft_photoboth/"><button  id="download" class="btn"><i class="fa fa-download"></i> Download </button></a>
+			<button  id="download" class="btn"><i class="fa fa-download"></i> Download </button>
 		</div>
 	</div>
-	<div id="cr"><canvas id="canvasr" width= 640 height= 480 style="max-width:70%;height:auto;"></canvas></div>
+	<div id="cr"><canvas id="canvasr" width= 480 height= 640 style="max-width:70%;height:auto;"></canvas></div>
 </center>
 	<script type="text/javascript">
 		'use strict';
@@ -114,7 +114,7 @@ h1.hidden {
 		const constraints={
 			audio: false,
 			video:{
-				width: 640, height: 480
+				width: 480, height: 640
 			}
 		};
 		async function init(){
@@ -146,8 +146,8 @@ h1.hidden {
 		var context= canvas1.getContext('2d');  
 		var context1= canvasr.getContext('2d');  
 		snap.addEventListener("click", function(){
-			context.drawImage(video,0,0,640,480);
-			context1.drawImage(video,0,0,640,480);
+			context.drawImage(video,0,0,480,640);
+			context1.drawImage(video,0,0,480,640);
 			var x = document.getElementById("control1");
 			var y= document.getElementById("control2");
 			var s1= document.getElementById("section1");
@@ -171,22 +171,22 @@ h1.hidden {
 		f3.crossOrigin = 'anonymous';
 		f3.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/Photo_frame_1_1280x1280_PX.png_with_event_name__logo.png';
 		frame1.addEventListener("click", function(){ 
-			context.clearRect(0,0,640,480);
-			context.drawImage(canvasr,0,0,640,480);
-			context.drawImage(f1,0,0,640,480);
+			context.clearRect(0,0,480,640);
+			context.drawImage(canvasr,0,0,480,640);
+			context.drawImage(f1,0,0,480,640);
 			
   			
 		});
 		frame3.addEventListener("click", function(){ 
-			context.clearRect(0,0,640,480); 
-			context.drawImage(canvasr,0,0,640,480);
-			context.drawImage(f2,0,0,640,480);
+			context.clearRect(0,0,480,640); 
+			context.drawImage(canvasr,0,0,480,640);
+			context.drawImage(f2,0,0,480,640);
 			
 		});
 		frame2.addEventListener("click", function(){
-			context.clearRect(0,0,640,480);
-			context.drawImage(canvasr,0,0,640,480);
-			context.drawImage(f3,0,0,640,480);
+			context.clearRect(0,0,480,640);
+			context.drawImage(canvasr,0,0,480,640);
+			context.drawImage(f3,0,0,480,640);
 
 		});
 
