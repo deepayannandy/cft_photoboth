@@ -1,0 +1,295 @@
+<!DOCTYPE>
+<html >
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Say Chees</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body{
+background-image: linear-gradient(to bottom right, red, black);
+}
+h1 {
+margin-top: 20px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 30 px;
+  font-family: Arial;
+}
+.imbt{
+    display: inline-block;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    width: 64px;
+}
+
+
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 1em;
+  cursor: pointer;
+}
+.section1{
+	margin-top: 30px;
+	height: 100%;
+  	margin-bottom: 30px;
+} 
+.section2{
+	margin-top: 30px;
+	height: 100%;
+  	margin-bottom: 30px;
+}
+
+div{
+	margin-top: 10px;
+  	margin-bottom: 10px;
+}
+
+h1.hidden {
+  display: none;
+}
+#canvas {
+  border: solid 1px gray;
+  margin-bottom: 10px;
+  display: block;
+}
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
+</head>
+<body>
+<center>
+	<div class="video-wrap" id="section1">
+		<image  src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/logocft.png" style="max-width:5%;height:auto;">
+		<H1>Virtual Photo Booth</H1>
+		<video id="video" autoplay height="480" width="640" style="max-width:70%;max-height:auto;"></video>
+		<div id="Cotroller">
+			<button id="snap" class="btn"><i class="fa fa-camera"></i> Capture</button>
+		</div>
+	</div>
+	<div id="section2">
+		<image  src="logocft.png" style="max-width:5%;height:auto;">
+		<H1>Looks Beautiful</H1>
+	<canvas id="canvas" width= 480 height= 640 style="max-width:70%;height:auto;">
+		</canvas>
+		<div id="editor">
+			<button  id="frame1" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame_1_128x96.png" style="max-width:100%;max-height:auto;"/></button>
+			<button  id="frame2" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F2_128X96.png" style="max-width:100%;max-height:auto;"/></button>
+			<button  id="frame3" class="imbt"><img src="https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/F3_128x96.png" style="max-width:100%;max-height:auto;"/></button>
+		</div>
+		<div id="control1">
+			<button onclick="like()" class="btn"><i class="fa fa-heart"></i> Like</button>
+			<button onclick="reset()" class="btn"><i class="fa fa-reply"></i> Retake</button>
+		</div>
+		
+		<div id="control2">
+			<a href="https://deepayannandy.github.io/cft_photoboth/"><button  id="download" class="btn"><i class="fa fa-download"></i> Download </button></a>
+			<button  id="send" onclick="sendmail()" class="btn"><i class="fa fa-download"></i> Send Mail </button>
+		</div>
+	</div>
+	<div id="cr"><canvas id="canvasr" width= 480 height= 640 style="max-width:70%;height:auto;"></canvas></div>
+</center>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+	<script type="text/javascript">
+		'use strict';
+		const sw=screen.width;
+		const sh=screen.height;
+		const video =document.getElementById('video');
+		const canvas1=document.getElementById('canvas');
+		const canvasr=document.getElementById('canvasr');
+		const snap=document.getElementById('snap');
+		const finalcanvas = document.getElementById("finalcanvas1");
+		const errorMsgElement= document.getElementById('span#ErrorMsg');
+		var s2= document.getElementById("section2");
+		s2.style.display = "none";
+		var e= document.getElementById("editor");
+		e.style.display="none"
+		var cr= document.getElementById("cr");
+		cr.style.display="none"
+
+
+		const constraints={
+			audio: false,
+			video:{
+				width: 640, height: 480
+			}
+		};
+		async function init(){
+			try{
+				const stream = await navigator.mediaDevices.getUserMedia(constraints)
+				handleSuccess(stream);
+			}
+			catch(e)
+			{
+				errorMsgElement.innerHTML=`navigator.getUserMedia.error:${e.toString()}`;
+			}
+		}
+
+		function handleSuccess(stream){
+			window.stream=stream;
+			video.srcObject=stream;
+		}
+		init();
+		function loadImage(src, onload) {
+    // http://www.thefutureoftheweb.com/blog/image-onload-isnt-being-called
+    	var img = new Image();
+
+    	img.onload = onload;
+    	img.src = src;
+
+    	return img;
+		}
+
+		var context= canvas1.getContext('2d');  
+		var context1= canvasr.getContext('2d');  
+		snap.addEventListener("click", function(){
+			context.drawImage(video,0,0,480,640);
+			context1.drawImage(video,0,0,480,640);
+			var x = document.getElementById("control1");
+			var y= document.getElementById("control2");
+			var s1= document.getElementById("section1");
+			var s2= document.getElementById("section2");
+			var e= document.getElementById("editor");
+			e.style.display="block"
+    		x.style.display = "block";
+    		y.style.display = "none";
+    		s1.style.display = "none";
+    		s2.style.display = "block";
+
+		});
+
+		var f1 = new Image();
+		f1.crossOrigin = 'anonymous';
+		f1.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/frame.png';
+		var f2 = new Image();
+		f2.crossOrigin = 'anonymous';
+		f2.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/Photo_frame_2_1280x1280_PX.png_with_event_name__logo%20(1).png';
+		var f3 = new Image();
+		f3.crossOrigin = 'anonymous';
+		f3.src = 'https://raw.githubusercontent.com/deepayannandy/cft_photoboth/main/Photo_frame_1_1280x1280_PX.png_with_event_name__logo.png';
+		frame1.addEventListener("click", function(){ 
+			context.clearRect(0,0,480,640);
+			context.drawImage(canvasr,0,0,480,640);
+			context.drawImage(f1,0,0,480,640);
+			
+  			
+		});
+		frame3.addEventListener("click", function(){ 
+			context.clearRect(0,0,480,640); 
+			context.drawImage(canvasr,0,0,480,640);
+			context.drawImage(f2,0,0,480,640);
+			
+		});
+		frame2.addEventListener("click", function(){
+			context.clearRect(0,0,480,640);
+			context.drawImage(canvasr,0,0,480,640);
+			context.drawImage(f3,0,0,480,640);
+
+		});
+
+		download.addEventListener("click", function(){
+			var s1= document.getElementById("section1");
+			var s2= document.getElementById("section2");
+			s1.style.display = "block";
+    		s2.style.display = "none";
+    		fdownload(canvas, 'myimage.png');
+
+		});
+		function reset(){
+				var s1= document.getElementById("section1");
+				var s2= document.getElementById("section2");
+				s1.style.display = "block";
+    			s2.style.display = "none";
+			}
+		function fdownload(canvas, filename) {
+  /// create an "off-screen" anchor tag
+  			var lnk = document.createElement('a'), e;
+
+  /// the key here is to set the download attribute of the a tag
+  			lnk.download = filename;
+
+  /// convert canvas content to data-uri for link. When download
+  /// attribute is set the content pointed to by link will be
+  /// pushed as "download" in HTML5 capable browsers
+  			lnk.href = canvas.toDataURL("image/png;base64");
+
+  /// create a "fake" click-event to trigger the download
+  			if (document.createEvent) {
+    			e = document.createEvent("MouseEvents");
+    			e.initMouseEvent("click", true, true, window,
+                     0, 0, 0, 0, 0, false, false, false,
+                     false, 0, null);
+
+    			lnk.dispatchEvent(e);
+  			} else if (lnk.fireEvent) {
+    		lnk.fireEvent("onclick");
+  			}
+			}
+			frame1.addEventListener("click", function(){
+				console.log("frame1");
+			});
+			function like(){
+			var x = document.getElementById("control1");
+			var y= document.getElementById("control2");
+  			if (x.style.display === "none") {
+    			x.style.display = "block";
+  				} else {
+    			x.style.display = "none";
+  				}
+			y.style.display = "block";
+  			var e= document.getElementById("editor");
+			e.style.display="none"
+			}
+
+			function sendmail(){
+    
+			
+			console.log("Sending")
+
+			// var body = $('#body').val();
+
+			var Body="This is a test mail";
+
+			Email.send({
+        SecureToken:"fbf31702-bb7f-4a4e-9c1c-4ccf17ee777f",
+				To: "ravi@craftech360.com",
+				From: 'deepayan.622@gmail.com',
+				Subject: "New message on contact from CFT360",
+				Body: Body,
+				Attachments : [
+            {
+              name : "myimage.png",
+              data : canvas.toDataURL("image/png;base64")
+            }]
+			}).then(
+				message =>{
+					//console.log (message);
+					if(message=='OK'){
+					alert('Your mail has been send. Thank you for connecting.');
+					}
+					else{
+						console.error (message);
+						alert('There is error at sending message. ')
+						
+					}
+
+				}
+			);
+
+
+
+		}
+
+	</script>
+
+</body>
