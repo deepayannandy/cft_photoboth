@@ -28,6 +28,21 @@ margin-top: 20px;
     vertical-align: top;
     width: 64px;
 }
+input {
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+}
+.type-1 {
+  border-radius:10px;
+  border: 1px solid #eee;
+  transition: .3s border-color;
+  width: 30%;
+}
+.type-1:hover {
+  border: 1px solid #aaa;
+}
 
 
 .btn {
@@ -95,7 +110,16 @@ h1.hidden {
 		
 		<div id="control2">
 			<a href="https://deepayannandy.github.io/cft_photoboth/"><button  id="download" class="btn"><i class="fa fa-download"></i> Download </button></a>
-			<button  id="send" onclick="sendmail()" class="btn"><i class="fa fa-mail"></i> Send Mail </button>
+		</div>
+		<div id="contact">
+			<table>
+			<form>
+			<tr><input type="text" class="type-1" name="name" id="name" placeholder="Name" required=""></tr>
+            <tr><input type="email" class="type-1" name="sender" id="sender" placeholder="Email"required=""></tr>
+			<tr><input type="number" class="type-1" name="number" id="number" placeholder="Mobile number" required=""></tr>
+			<tr><input type="number" class="type-1" name="age" id="age" placeholder="Age" required=""></tr>
+			</form></table>
+			<button  id="send" onclick="sendmail()" class="btn"><i class="fa fa-email"></i> Send Mail </button>
 		</div>
 	</div>
 	<div id="cr"><canvas id="canvasr" width= 480 height= 640 style="max-width:70%;height:auto;"></canvas></div>
@@ -262,13 +286,17 @@ h1.hidden {
 			
 			console.log("Sending")
 
+			var name = $('#name').val();
+			var email = $('#sender').val();
+			var number = $('#number').val();
+      		var age = $('#age').val();
+
 			// var body = $('#body').val();
 
-			var Body="This is a test mail";
+			var Body="Hello, "+name+'<br> Here is your awsome click.';
 
-			Email.send({
-        SecureToken:"fbf31702-bb7f-4a4e-9c1c-4ccf17ee777f",
-				To: "ravi@craftech360.com",
+			Email.send({SecureToken:"fbf31702-bb7f-4a4e-9c1c-4ccf17ee777f",
+				To: email,
 				From: 'deepayan.622@gmail.com',
 				Subject: "New message on contact from CFT360",
 				Body: Body,
