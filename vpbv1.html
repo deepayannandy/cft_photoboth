@@ -146,6 +146,8 @@ h1.hidden {
 		e.style.display="none"
 		var cr= document.getElementById("cr");
 		cr.style.display="none"
+		var ct= document.getElementById("contact");
+		ct.style.display="none"
 
 
 		const constraints={
@@ -276,9 +278,12 @@ h1.hidden {
   				} else {
     			x.style.display = "none";
   				}
-			y.style.display = "block";
+			y.style.display = "none";
   			var e= document.getElementById("editor");
 			e.style.display="none"
+			var ct= document.getElementById("contact");
+			ct.style.display="block"
+			canvas1.style.display="none"
 			}
 		
 		function sendmail(){
