@@ -122,7 +122,7 @@ h1.hidden {
 	</div>
 	<div id="section2">
 		<image  src="logopuma.png" style="max-width:5%;height:auto;">
-		<H1>Looks Beautiful</H1>
+		<H1 id="message">Looks Beautiful</H1>
 	<canvas id="canvas" width= 600 height= 600 style="max-width:70%;height:auto;">
 		</canvas>
 		<div id="editor">
@@ -149,7 +149,6 @@ h1.hidden {
 			<button  id="send" onclick="sendmail()" class="btn"><i class="fa fa-email"></i> Send Mail </button>
 		</div>
 		<div id="loader">
-			<h2>Something is cooking!</h2>
 			<div class="loader"></div>
 		</div>
 	</div>
@@ -324,6 +323,8 @@ h1.hidden {
 			ct.style.display="none"
 			var lr= document.getElementById("loader");
 			lr.style.display="block"
+			var msg= document.getElementById("message");
+			msg.innerHTML = "Something Special is Cooking!"
 			console.log("Sending")
 
 			var name = $('#name').val();
