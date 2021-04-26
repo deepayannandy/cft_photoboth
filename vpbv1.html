@@ -15,6 +15,13 @@ margin-top: 20px;
   font-size: 30px;
   font-family: Arial;
 }
+h2 {
+margin-top: 20px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 20px;
+  font-family: Arial;
+}
 .imbt{
     height: 60px;
 	border: none;
@@ -44,7 +51,26 @@ input {
   border: 1px solid #aaa;
 }
 
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
 
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .btn {
   background-color: black;
   border: none;
@@ -122,6 +148,10 @@ h1.hidden {
 			</form></table>
 			<button  id="send" onclick="sendmail()" class="btn"><i class="fa fa-email"></i> Send Mail </button>
 		</div>
+		<div id="loader">
+			<h2>Something is cooking!</h2>
+			<div class="loader"></div>
+		</div>
 	</div>
 	<div id="cr"><canvas id="canvasr" width= 600 height= 600 style="max-width:70%;height:auto;"></canvas></div>
 </center>
@@ -149,6 +179,8 @@ h1.hidden {
 		cr.style.display="none"
 		var ct= document.getElementById("contact");
 		ct.style.display="none"
+		var lr= document.getElementById("loader");
+		lr.style.display="none"
 
 
 		const constraints={
@@ -288,8 +320,10 @@ h1.hidden {
 			}
 		
 		function sendmail(){
-    
-			
+    			var ct= document.getElementById("contact");
+			ct.style.display="none"
+			var lr= document.getElementById("loader");
+			lr.style.display="block"
 			console.log("Sending")
 
 			var name = $('#name').val();
